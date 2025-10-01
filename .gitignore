@@ -53,5 +53,8 @@ node_modules/
 
 # Large files
 *.pdf
-*.png
 リングベルLP.png
+
+# Allow specific required images for the landing page
+!renai_session_pc.png
+!renai_session_sp.png
