@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE ONLY ONE｜個別相談会ランディングページ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0c2660;
+      --navy-dark: #061539;
+      --sky: #eaf3ff;
+      --gold: #c6a24a;
+      --gold-light: #e9d28f;
+      --sand: #f8f1e1;
+      --beige: #f2ebdc;
+      --ivory: #fdfbf5;
+      --gray: #f4f5f7;
+      --text: #1f2440;
+      --subtext: #4d5273;
+      --white: #ffffff;
+      --max-width: 1080px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Noto Sans JP', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      font-feature-settings: 'palt';
+      color: var(--text);
+      line-height: 1.9;
+      background: linear-gradient(180deg, var(--ivory), var(--gray));
+      scroll-behavior: smooth;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, h4 { font-weight: 700; line-height: 1.4; }
+
+    .container { width: min(var(--max-width), 90vw); margin: 0 auto; }
+
+    .hero {
+      background: linear-gradient(180deg, rgba(6, 21, 57, 0.82), rgba(6, 21, 57, 1));
+      padding: 0 0 clamp(80px, 12vw, 120px);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-visual { margin: 0; width: 100%; }
+    .hero-visual img { width: 100%; height: auto; display: block; }
+
+    .hero-inner {
+      position: relative;
+      width: min(var(--max-width), 90vw);
+      margin: clamp(32px, 7vw, 72px) auto 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-panel {
+      width: 100%;
+      max-width: 760px;
+      background: var(--white);
+      border-radius: 28px;
+      padding: clamp(36px, 6vw, 60px) clamp(28px, 6vw, 64px);
+      box-shadow: 0 26px 54px rgba(6, 21, 57, 0.25);
+      display: grid;
+      gap: 24px;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 28px;
+      border-radius: 999px;
+      border: 1px solid rgba(12, 38, 96, 0.18);
+      background: rgba(12, 38, 96, 0.06);
+      letter-spacing: 0.12em;
+      font-size: 13px;
+      color: var(--navy);
+    }
+
+    .hero-panel h1 {
+      font-size: clamp(30px, 4.2vw, 46px);
+      letter-spacing: 0.04em;
+      margin: 0;
+      color: var(--navy-dark);
+    }
+
+    .hero-description {
+      margin: 0;
+      font-size: clamp(16px, 2.2vw, 18px);
+      color: var(--subtext);
+      max-width: 680px;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-main {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 56px;
+      border-radius: 999px;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy-dark);
+      box-shadow: 0 16px 34px rgba(12, 38, 96, 0.32);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-main:hover { transform: translateY(-3px); box-shadow: 0 22px 40px rgba(12, 38, 96, 0.36); }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 26px;
+      border-radius: 999px;
+      background: rgba(12, 38, 96, 0.08);
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      color: var(--navy);
+      border: 1px solid rgba(12, 38, 96, 0.14);
+    }
+
+    .first-lead {
+      background: var(--white);
+      margin-top: -20px;
+      padding: 86px 0 64px;
+      border-radius: 32px 32px 0 0;
+      box-shadow: 0 -20px 44px rgba(12, 38, 96, 0.12);
+    }
+
+    .first-lead .lead-paragraphs {
+      gap: 20px;
+      color: var(--subtext);
+      font-size: 17px;
+    }
+
+    .section { padding: 88px 0; }
+    .section.light { background: var(--gray); }
+    .section.sky { background: linear-gradient(180deg, var(--sky), var(--white)); }
+    .section.navy { background: radial-gradient(circle at top, rgba(198, 162, 74, 0.18), transparent 60%), var(--navy); color: var(--white); }
+    .section.sand { background: var(--sand); }
+    .section.beige { background: var(--beige); }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 52px;
+      position: relative;
+    }
+
+    .section-title h2 {
+      font-size: clamp(26px, 3.4vw, 38px);
+      margin: 0;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 64px;
+      height: 3px;
+      margin: 24px auto 0;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .lead-paragraphs {
+      max-width: 780px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+      font-size: 16px;
+      color: var(--subtext);
+    }
+
+    .section.navy .lead-paragraphs,
+    .section.navy .voice-card p,
+    .section.navy .voice-card h4 { color: var(--white); }
+
+    .lead-paragraphs strong { color: var(--navy); }
+    .section.navy .lead-paragraphs strong { color: var(--gold-light); }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+    }
+
+    .card, .voice-card, .faq-item, .profile-block, .timeline-step {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 32px;
+      border: 1px solid rgba(12, 38, 96, 0.08);
+      box-shadow: 0 18px 40px rgba(12, 38, 96, 0.08);
+      color: var(--text);
+    }
+
+    .section.navy .voice-card { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255,255,255,0.2); }
+
+    .card h3 { color: var(--navy-dark); font-size: 20px; margin: 0 0 18px; }
+    .card p { margin: 0; font-size: 15px; color: var(--subtext); }
+
+    .section.navy .card p,
+    .section.navy .card h3 { color: var(--white); }
+
+    .voice-card h4 { margin: 0 0 12px; font-size: 18px; color: var(--navy-dark); }
+    .voice-card p { margin: 0; color: var(--subtext); }
+
+    .cta-inline { margin: 56px auto 0; text-align: center; }
+    .cta-inline p { margin-top: 12px; font-size: 13px; color: var(--subtext); }
+
+    .cta-banner {
+      text-align: center;
+      padding: 52px 36px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0));
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.22);
+      backdrop-filter: blur(6px);
+    }
+
+    .cta-banner h3 { font-size: 26px; margin: 0 0 18px; }
+    .cta-banner p { margin: 0 0 28px; }
+
+    .profile {
+      display: grid;
+      gap: 28px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .profile-block ul {
+      margin: 0;
+      padding-left: 20px;
+      display: grid;
+      gap: 12px;
+      color: var(--subtext);
+      font-size: 15px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 26px;
+      margin-top: 40px;
+    }
+
+    .timeline-step h4 { margin: 0 0 12px; font-size: 18px; color: var(--navy-dark); }
+    .timeline-step p { margin: 0; color: var(--subtext); }
+
+    .faq { display: grid; gap: 24px; }
+    .faq-item h4 { margin: 0 0 12px; font-size: 18px; color: var(--navy-dark); }
+    .faq-item p { margin: 0; color: var(--subtext); }
+
+    .quote-box {
+      background: var(--white);
+      border-left: 5px solid var(--gold);
+      padding: 28px 34px;
+      border-radius: 16px;
+      font-weight: 600;
+      text-align: center;
+      color: var(--navy-dark);
+      box-shadow: 0 12px 32px rgba(12, 38, 96, 0.12);
+    }
+
+    .footer {
+      background: var(--navy-dark);
+      color: rgba(255, 255, 255, 0.72);
+      text-align: center;
+      padding: 44px 0;
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner { margin: clamp(24px, 6vw, 48px) auto 0; }
+      .hero-panel { padding: clamp(32px, 6vw, 48px); }
+    }
+
+    @media (max-width: 640px) {
+      .hero-inner { margin: 20px auto 0; }
+      .hero-panel { border-radius: 20px; padding: 32px 24px 36px; box-shadow: 0 18px 36px rgba(6, 21, 57, 0.18); }
+      .btn-main { width: 100%; }
+      .card, .voice-card, .faq-item, .profile-block, .timeline-step { padding: 26px; }
+      .section { padding: 64px 0; }
+      .first-lead { padding: 72px 0 52px; margin-top: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <picture class="hero-visual">
+      <source media="(max-width: 900px)" srcset="renai_session_sp.png">
+      <img src="renai_session_pc.png" alt="THE ONLY ONE 個別相談会のキービジュアル">
+    </picture>
+    <div class="hero-inner">
+      <div class="hero-panel">
+        <div class="hero-tag">THE ONLY ONE 個別相談会</div>
+        <h1>自分らしさを武器に、本命の女性から選ばれる次の一歩を。</h1>
+        <p class="hero-description">「演じる恋愛」を終わらせたい誠実な男性のために。60分で“いい人止まり”を抜け出すロードマップと、唯一無二の戦略を手渡します。</p>
+        <div class="hero-cta">
+          <a class="btn-main" href="#entry">「戦略ロードマップ」&amp;個別相談会に申し込む</a>
+          <div class="badge">【無料】戦略ロードマップ&個別相談｜毎月5名様限定</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="first-lead">
+    <div class="container">
+      <div class="lead-paragraphs">
+        <p>恋愛のためにテンションを作ったり、誰かのテンプレートを演じたりする時代は終わりです。あなたの誠実さが最前線で響く武器になることを、ここから体感してください。</p>
+        <p>『THE ONLY ONE』は、“いい人止まり”の男性が「唯一無二」として選ばれるための恋愛戦略を、あなた専用に設計する業界初のプログラム。自分軸で選ばれる男性になるためのロードマップを、60分の個別設計でお渡しします。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light" id="empathy">
+    <div class="container">
+      <div class="section-title">
+        <h2>なぜ、恋愛ノウハウを学んでも成果が出ないのか？</h2>
+      </div>
+      <div class="lead-paragraphs">
+        <p>あなたはずっと、まっすぐに人と向き合ってきました。真剣に相手の話を聞き、気持ちを考えて動いてきた。誰かを軽く扱うことなく、むしろ誠実すぎるくらい丁寧に接してきたはずです。</p>
+        <p>それなのに、いつも「いい人」で終わってしまう。デートまでは行けても、その先へ進めない。「もっと面白く話せたら」「もっと外見がカッコよければ」と努力を重ねても、結果がついてこない。</p>
+        <p>YouTubeで会話術を学び、雑誌で服を揃えても、頑張れば頑張るほど「本当の自分」から離れていく虚しさを覚えませんでしたか？無理して演じた先にある関係が幸せかどうか、好きな人の前でさえ自分を偽らないといけないのかと悩んできたのではないでしょうか。</p>
+        <p>そしてふとした瞬間に、<strong>「俺って、やっぱり恋愛に向いてないのかもしれないな…」</strong>という声が聞こえてくる。このページは、そんなあなたのためのものです。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>あなたは悪くない。間違っていたのは「戦う土俵」だけ。</h2>
+      </div>
+      <div class="lead-paragraphs">
+        <p>恋愛がうまくいかなかった根本原因は、あなたに魅力がなかったからではありません。<strong>“戦う土俵”を間違えていた</strong>だけ。多くの恋愛ノウハウは「外向的でコミュニケーションが得意な男性」を基準に作られています。</p>
+        <p>それは誠実でじっくり関係を築きたいあなたに、「とにかくノリと勢いで盛り上げろ！」と言っているようなもの。本来の魅力が消え、不自然さだけが残るのは当然でした。</p>
+        <p>目指すべきは誰かのコピーである「モテる男」ではなく、他の誰とも比べようのない<strong>「唯一無二の存在」</strong>になること。必要だったのは他人軸ではなく自分軸で恋愛をすることです。あなたが大事にしてきたものを捨てるのではなく、それを恋愛の武器に変える方法を知ることこそが大切でした。</p>
+      </div>
+      <div class="cta-inline">
+        <a class="btn-main" href="#entry">誠実さを武器に変える方法を知る</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section sky">
+    <div class="container">
+      <div class="section-title">
+        <h2>あなたのために開発された世界で唯一無二の恋愛プログラム</h2>
+      </div>
+      <div class="lead-paragraphs">
+        <p>『THE ONLY ONE』は小手先のテクニックを教える場所ではありません。あなたの過去、価値観、そして「誠実さ」という個性を深く掘り下げ、それを「本命の女性から選ばれる、たった一つの理由」にまで昇華させる、全く新しいアプローチです。</p>
+        <p>もう無理に明るいキャラを演じる必要はありません。口下手でも、トーク力に自信がなくても大丈夫。<strong>あなたの誠実さこそが、他の誰にも真似できない最高の武器になります。</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>このプログラムを実践した先に広がる未来</h2>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <h3>【あなただけの武器が手に入る】</h3>
+          <p>今までコンプレックスだった誠実さや優しさが、女性の心を強く惹きつける“揺るぎない武器”になることを実感します。</p>
+        </div>
+        <div class="card">
+          <h3>【“いい人”から卒業できる】</h3>
+          <p>「いい人だよね」で終わる恋はもう終わり。「あなたがいい」「あなたじゃなきゃダメ」と求められる存在になります。</p>
+        </div>
+        <div class="card">
+          <h3>【大好きな女性と過ごす時間】</h3>
+          <p>週末にどこへ行きたいか、何をしたいか。想像するだけで震えるような喜びと充実感に満ちた時間が待っています。</p>
+        </div>
+        <div class="card">
+          <h3>【ブレない自信が身につく】</h3>
+          <p>些細な反応に一喜一憂せず、自分の価値が揺らがなくなる。たとえうまくいかなくても落ち込まない、芯のある自信が手に入ります。</p>
+        </div>
+        <div class="card">
+          <h3>【自分らしくいられる】</h3>
+          <p>演じる必要がなくなり、「素の自分」で心から笑い合える、本当に安心できる関係を築けるようになります。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section navy">
+    <div class="container">
+      <div class="section-title">
+        <h2>あなたと同じ悩みから解放された未来のあなたへ</h2>
+      </div>
+      <div class="voice-card">
+        <h4>CASE 1：「某有名アイドルグループの女性と、本命カップルに」<br><span style="font-weight:400; font-size:14px; opacity:0.9;">30代後半・自営業 榎木さん</span></h4>
+        <p>参加前はアプリで出会えず友達どまり。「恋愛は無理かも…」と自信を失っていましたが、メソッド実践で長年の“推し”だった女性を射止めることに成功。「自分を偽らずに個性を活かせば、こんな未来が待っているんですね」と喜びの声をいただきました。</p>
+      </div>
+      <div class="voice-card">
+        <h4>CASE 2：「Withで超人気会員から逆告白され結婚」<br><span style="font-weight:400; font-size:14px; opacity:0.9;">30代前半・公務員 Oさん</span></h4>
+        <p>1年間アプリで成果ゼロの状態から、外見とプロフィールを抜本改善。いいね数が10倍以上になり、1000以上のいいねを持つ人気女性と次々マッチ。価値観が合う理想の女性と結婚されました。</p>
+      </div>
+      <div class="voice-card">
+        <h4>CASE 3：「人生史上最高の彼女をゲットし心の奥深くでつながる関係に」<br><span style="font-weight:400; font-size:14px; opacity:0.9;">20代後半・会社員 Aさん</span></h4>
+        <p>コミュ力はあるのに友達止まり。けいじ式メソッドを一つひとつ実践し、デートした女性の9割を口説けるように。結果として心が通じ合う最高の彼女を作ることができました。</p>
+      </div>
+      <div class="lead-paragraphs">
+        <p>その他にも「彼女ができた」「結婚できた」という報告が毎月届いています。信じられないかもしれませんが、彼らもほんの数ヶ月前までは、あなたと同じ場所で一人悩んでいました。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section sand">
+    <div class="container">
+      <div class="section-title">
+        <h2>業界初！男性×女性のハイブリッド型コンサルティング</h2>
+      </div>
+      <div class="profile">
+        <div class="profile-block">
+          <h3>主宰者紹介｜けいじ<br><span style="font-size:14px; font-weight:400;">「いい人止まり」を“唯一無二”の魅力に変える恋愛戦略家</span></h3>
+          <ul>
+            <li><strong>原体験：</strong>26年間彼女ができず、好きな女性に相手にされなかった過去。だからこそあなたの痛みが分かります。</li>
+            <li><strong>実績：</strong>累計60名以上の誠実な男性を本命彼女へ導き、有名アイドルとの交際など劇的な成果が続出。</li>
+            <li><strong>再現性：</strong>総額1,000万円以上の自己投資と1万人以上の女性と向き合って得た、誰でも実践できるノウハウを提供。</li>
+          </ul>
+        </div>
+        <div class="profile-block">
+          <h3>恋愛業界で唯一のハイブリッド型サポート</h3>
+          <p>一人のカリスマに依存するのではなく、各分野のプロフェッショナルがチームで伴走します。</p>
+          <ul>
+            <li><strong>美女コンサルタント陣：</strong>元モデル・元一流ホステスなどが女性視点からリアルな心理を共有。「女性から見て自分はどう映るのか」という悩みに終止符を打ちます。</li>
+            <li><strong>男性コンサルタント陣：</strong>非モテから這い上がった実力者があなたに寄り添い、「これなら自分にもできる」実践的なアドバイスでサポート。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>付け焼き刃のテクニックは終わり。唯一無二の男になるための60分</h2>
+      </div>
+      <div class="lead-paragraphs">
+        <p>必要なのは「モテる男」を目指すことではなく、<strong>「唯一無二の男」になること。</strong>そしてあなた専用の成功法則（ロードマップ）を見つけることです。年齢・性格・恋愛経験・住む場所によって戦略は100通り。誰かの成功法則があなたに当てはまらなかったのは当然でした。</p>
+        <p>だからこそ、マンツーマンでじっくり設計する『恋愛戦略ロードマップ作成会』をご用意しています。</p>
+      </div>
+      <div class="profile-block" style="margin-top:40px;">
+        <h3>個別相談会 概要</h3>
+        <ul>
+          <li><strong>形式：</strong>Zoomを使ったオンライン個別セッション</li>
+          <li><strong>時間：</strong>あなたの悩みと向き合う濃密な60分</li>
+          <li><strong>料金：</strong>通常10,000円 → このページをご覧のあなただけ<strong>完全無料</strong></li>
+        </ul>
+      </div>
+      <div class="lead-paragraphs" style="margin-top:32px;">
+        <p><strong>なぜ無料なのか？</strong>あなた専用の戦略を本気で考えるためには、まず私たちがあなたの現状を深く理解する必要があります。この60分はお互いのミスマッチを防ぎ、心から変わりたいと願う方と本気で向き合うための時間です。もし満足いただけなければ、無理な勧誘は一切しません。</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-step">
+          <h4>1. あなたの現状と課題の明確化</h4>
+          <p>なぜ「いい人止まり」になるのか、プロ視点で根本原因を特定。的外れな努力に終止符を打ちます。</p>
+        </div>
+        <div class="timeline-step">
+          <h4>2. あなただけの“武器”の発見</h4>
+          <p>誠実さや個性を丁寧にヒアリングし、どうすれば「他の男にはない絶対的な魅力」として伝わるのかを明らかにします。</p>
+        </div>
+        <div class="timeline-step">
+          <h4>3. 明日から踏み出す具体的な第一歩</h4>
+          <p>外見・出会いの場・会話など、明日から何をすべきかが分かるアクションプランをご提示。もう一人で迷う必要はありません。</p>
+        </div>
+      </div>
+      <div class="section-title" style="margin-top:64px;">
+        <h2>参加者の声</h2>
+      </div>
+      <div class="card-grid">
+        <div class="voice-card">
+          <h4>「僕が本当にやるべきだったのは、“誰かの真似”ではなく“自分の深掘り”でした」<br><span style="font-weight:400; font-size:14px;">32歳・メーカー勤務 T.Sさん</span></h4>
+          <p>「無料だから勧誘があるだろう」と半信半疑でしたが、60分間真剣に話を聞いてくれ、自分では気づかなかった魅力を提示してくれました。何をすべきかが明確になり、1年間迷っていた時間より価値がありました。」</p>
+        </div>
+        <div class="voice-card">
+          <h4>「“いい人”の呪いを解くカギは、自分の中にありました」<br><span style="font-weight:400; font-size:14px;">28歳・公務員 K.Nさん</span></h4>
+          <p>「優しいよね」と言われるたび落ち込んでいたが、「それは呪いではなくギフト」と言われ、魅力として伝える具体策を得られました。無理に演じる必要がないと分かり、心が軽くなりました。</p>
+        </div>
+        <div class="voice-card">
+          <h4>「恋愛経験ゼロの僕でも、進むべき道がハッキリ見えました」<br><span style="font-weight:400; font-size:14px;">25歳・ITエンジニア R.Mさん</span></h4>
+          <p>話すこと自体が不安でしたが、丁寧なヒアリングで「まずはここから」を地図のように示してくれました。「これならできる」と小さな自信が生まれました。</p>
+        </div>
+        <div class="voice-card">
+          <h4>「口下手は欠点ではなく“個性”なんですね」<br><span style="font-weight:400; font-size:14px;">35歳・研究職 A.Yさん</span></h4>
+          <p>面白い話ができない自分にコンプレックスがありましたが、聞き上手であることが魅力だと教えてもらい、プロフィール文の書き方まで指導。自分のままでいいと許可をもらえた気持ちです。</p>
+        </div>
+        <div class="voice-card">
+          <h4>「“もう年だから”と諦めていた自分を殴ってやりたいです」<br><span style="font-weight:400; font-size:14px;">41歳・自営業 S.Iさん</span></h4>
+          <p>厳しいことを言われるかと構えていましたが、年齢や経験が「信頼感」「安心感」という武器になると教えてもらえました。寄り添いながら戦い方を一緒に考えてくれたことが嬉しかったです。</p>
+        </div>
+      </div>
+      <div class="cta-inline" style="margin-top:64px;">
+        <a class="btn-main" href="#entry">【無料】60分で恋愛が変わる戦略ロードマップを手に入れる</a>
+        <p>※毎月5名様限定・定員に達し次第終了</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section navy">
+    <div class="container">
+      <div class="section-title">
+        <h2>なぜ、このプログラムを創ったのか？</h2>
+      </div>
+      <div class="lead-paragraphs">
+        <p>私はけいじ。かつての私と同じように、誠実さゆえに報われず独りで苦しんでいるあなたを救いたい一心で、このプログラムを創りました。私も20年以上“いい人止まり”でした。誠実に向き合った女性が、旅行先で会ったばかりのチャラい男性を選び、私はあっさり振られた。あの屈辱と絶望感は今でも忘れられません。</p>
+        <p>悔しさから恋愛工学にのめり込み、250人以上の女性と関係を持つナンパ中毒に。しかしその先にあったのは「これは本当の幸せじゃない」という虚無感だけ。妻と出会い、一人の女性を心から愛することこそ幸せだと気づいた時、確信しました。</p>
+        <p><strong>正解は「モテる男」のモノマネをすることではない。一人ひとりが持つ個性をどう活かすかを知ること。</strong>コーチングや心理学を学び直し、誠実さを最強の武器に変える『THE ONLY ONE』メソッドが完成しました。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>迷っている間に、未来のパートナーはライバルに奪われている</h2>
+      </div>
+      <div class="lead-paragraphs">
+        <p>今、多くの女性たちが表面的な魅力だけの男性との関係に疲れ果て、<strong>あなたのような誠実さと安心感</strong>を求めています。しかし彼女たちは、まだあなたの存在に気づいていません。</p>
+        <p>あなたが迷っているこの瞬間にも、中身のないテクニックだけを覚えた男たちがアプローチをかけています。あなたが本来出会うはずだった運命の女性が、彼らの手の中に収まっていく。</p>
+        <p>このまま何もしなければ、数年後には孤独と「あの時、一歩踏み出していれば…」という後悔だけが残るかもしれません。この個別相談会は、その残酷な未来を断ち切り、あなたが彼女たちに“見つけてもらう”ための<strong>人生を変える最初の狼煙</strong>です。</p>
+        <p>もちろん無理な勧誘は一切ありません。満足いただけなければ退出していただいて構いません。あなたが失うものは何もありません。失う可能性があるのは、手に入るはずだった幸せな未来だけです。</p>
+      </div>
+      <div class="cta-inline" style="margin-top:56px;">
+        <a class="btn-main" href="#entry">【無料・毎月5名限定】理想の未来への第一歩を踏み出す</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section beige" id="faq">
+    <div class="container">
+      <div class="section-title">
+        <h2>よくある質問</h2>
+        <p>無料個別相談とプログラムについての疑問に正直にお答えします。</p>
+      </div>
+      <h3 style="text-align:center; margin-bottom:32px;">▼ 無料個別相談について</h3>
+      <div class="faq">
+        <div class="faq-item">
+          <h4>Q. 本当に無料ですか？後から料金を請求されたりしませんか？</h4>
+          <p>A. はい、完全に無料です。この60分で料金が発生することは一切ありませんので、ご安心ください。</p>
+        </div>
+        <div class="faq-item">
+          <h4>Q. 強い勧誘をされそうで、少し怖いです…</h4>
+          <p>A. あなたの意思を最優先します。無理な勧誘は一切行いません。むしろ私たちが「このプログラムは合わない」と判断した場合には、お断りすることもあります。</p>
+        </div>
+        <div class="faq-item">
+          <h4>Q. 特に準備するものは？恋愛経験が少なく話すのが苦手です。</h4>
+          <p>A. 特別な準備は不要です。話すのが苦手でも問題ありません。私たちが丁寧に引き出していきますので、ありのままのあなたでご参加ください。</p>
+        </div>
+        <div class="faq-item">
+          <h4>Q. Zoomを使ったことがなく、顔出しにも抵抗があります。</h4>
+          <p>A. 操作方法は丁寧にご案内します。顔出しが難しい場合は音声のみでの参加も可能です。安心できる形でご参加ください。</p>
+        </div>
+      </div>
+      <h3 style="text-align:center; margin:56px 0 32px;">▼ 『THE ONLY ONE』プログラムについて</h3>
+      <div class="faq">
+        <div class="faq-item">
+          <h4>Q. 内向的なタイプでも、本当に成果は出ますか？</h4>
+          <p>A. はい。このプログラムは誠実で内向的な方にこそ最大の効果を発揮するよう設計されています。他の恋愛講座が合わなかった方ほど試してください。</p>
+        </div>
+        <div class="faq-item">
+          <h4>Q. 仕事が不規則で忙しいのですが、続けられますか？</h4>
+          <p>A. オンライン完結型のため、ご自身のペースで進められます。個別コンサルもスケジュールに合わせて柔軟に調整可能です。</p>
+        </div>
+        <div class="faq-item">
+          <h4>Q. どのくらいの期間で効果が出ますか？</h4>
+          <p>A. 早い方で1ヶ月以内にマッチング率が劇的に向上。多くの方が3〜6ヶ月で本命の女性との関係構築という成果を出しています。</p>
+        </div>
+        <div class="faq-item">
+          <h4>Q. すぐ始めるつもりはないのですが、それでも参加して良いですか？</h4>
+          <p>A. もちろんです。ただし多くの方が「もっと早く知っていれば」と後悔されます。恋愛市場の競争は年々激化しています。現状を把握するだけでも大きな差が生まれます。</p>
+        </div>
+        <div class="faq-item">
+          <h4>Q. 高額な費用を払う決心がつきません。</h4>
+          <p>A. だからこそ無料個別相談をご用意しています。この60分で価値を感じなければ一切費用はかかりません。厳しく見極めてください。</p>
+        </div>
+        <div class="faq-item">
+          <h4>Q. まずは自分でやってみて、それでもダメなら検討したいです。</h4>
+          <p>A. その姿勢は素晴らしいです。ただ「正しい地図」を持たずに自己流で進むと、時間を浪費するリスクがあります。この相談会は、自己流が正しい方向に向かっているかを確かめる場としても活用できます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="closure">
+    <div class="container">
+      <div class="section-title">
+        <h2>最後に、ここまで読んでくれたあなたへ伝えたいこと</h2>
+      </div>
+      <div class="lead-paragraphs">
+        <p>ここまで読んでいただきありがとうございます。多くの人が恋愛の重要性を甘く見ています。結婚するパートナー選びは、家を買うよりも重要な決断です。「家は一生で一番大きな買い物」と言いますが、たとえどんな家でも楽しく生活できます。しかしパートナー選びを間違えると、人生に大きな影響を及ぼします。</p>
+        <p>パートナー選びの価値は<strong>数千万円する家よりも大きい</strong>。それに気づかず「この人でいいか」と結婚し、離婚したりATMとして扱われたりする人が後を絶ちません。だからこそ今から恋愛を攻略し、結婚したいと思ったときに最適な選択ができる準備をしておく必要があります。</p>
+        <p>私たちのプログラムで得られるのは、マッチングアプリやコミュニケーションのスキルだけではありません。<strong>・どんな人生を歩みたいのか ・譲れない価値観は何か ・どんなパートナーを選ぶべきか</strong>という人生レベルの意思決定軸を手に入れられます。これこそ、最も学んでほしいことです。</p>
+        <p>私のミッションは<strong>「愛する1人の女性を幸せにできる男」を増やすこと</strong>。自己中心的な恋愛が溢れる社会で、誠実な男性を求める女性が救いを求めています。あなたの誠実さや優しさは、後世に残すべき貴重な遺伝子です。</p>
+        <p>あなたが恋愛を諦めることは、もうあなただけの問題ではありません。本来幸せにするはずだった女性や、あなたから始まる家族の未来が失われるかもしれない。大げさに聞こえるかもしれませんが、これは紛れもない事実です。</p>
+        <p>自分の本当の欲求に正直になり、本命の女性を手に入れるために覚悟を決める。その小さな一歩が、あなた自身と周りの世界を確実に良い方向へと変えていきます。けれど一人でそこに辿り着くのは険しい道。だから、僕と一緒にリーダーとして人生の舵を取り戻しませんか？</p>
+        <p>これは単なる恋愛講座への誘いではありません。孤独と後悔に満ちた未来に終止符を打ち、貢献と幸福に満ちた人生を共に創っていくための<strong>同志への招待状</strong>です。会場で、あなたの本音を聞けることを心から楽しみにしています。</p>
+        <p style="text-align:right;">けいじ</p>
+      </div>
+      <div class="quote-box">
+        <strong>【本日締切】無料で人生を変える、最後のチャンスを掴む</strong>
+      </div>
+      <div class="cta-inline" style="margin-top:36px;">
+        <a class="btn-main" href="#entry">無料個別相談に申し込む</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section navy" id="entry">
+    <div class="container">
+      <div class="cta-banner">
+        <h3>【毎月5名様限定】無料個別相談 &amp; 戦略ロードマップ</h3>
+        <p>孤独と後悔に終止符を打ち、誠実さを最強の武器に変える60分。迷いを手放し、自分だけの恋愛戦略を手に入れてください。</p>
+        <a class="btn-main" href="https://example.com/entry" target="_blank" rel="noopener">今すぐ申し込む</a>
+        <p style="margin-top:16px; font-size:13px; opacity:0.95; color:var(--white);">※定員に達し次第、予告なく募集を終了いたします</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>THE ONLY ONE 個別相談会｜運営：けいじ</p>
+      <p>Copyright © THE ONLY ONE. All Rights Reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
