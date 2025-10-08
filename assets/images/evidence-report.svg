@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540">
+  <defs>
+    <linearGradient id="gradEvidenceBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef2ff" />
+      <stop offset="1" stop-color="#dfe8ff" />
+    </linearGradient>
+    <linearGradient id="gradEvidenceBars" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#90a7ff" />
+      <stop offset="1" stop-color="#c2d0ff" />
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" rx="36" fill="url(#gradEvidenceBg)" />
+  <g transform="translate(140 80)">
+    <rect x="40" y="220" width="70" height="140" rx="16" fill="url(#gradEvidenceBars)" />
+    <rect x="140" y="180" width="70" height="180" rx="16" fill="url(#gradEvidenceBars)" />
+    <rect x="240" y="140" width="70" height="220" rx="16" fill="url(#gradEvidenceBars)" />
+    <rect x="340" y="110" width="70" height="250" rx="16" fill="url(#gradEvidenceBars)" />
+    <rect x="440" y="80" width="70" height="280" rx="16" fill="url(#gradEvidenceBars)" />
+    <rect x="540" y="60" width="70" height="300" rx="16" fill="url(#gradEvidenceBars)" />
+  </g>
+  <text x="480" y="270" fill="#304070" font-size="48" font-family="'Noto Sans JP', sans-serif" text-anchor="middle">Evidence Image</text>
+  <text x="480" y="330" fill="#304070" font-size="32" font-family="'Noto Sans JP', sans-serif" text-anchor="middle">Replace with proof photo</text>
+</svg>

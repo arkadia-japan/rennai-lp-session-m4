@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <defs>
+    <linearGradient id="gradMaleB" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#cbe2ff" />
+      <stop offset="1" stop-color="#e0fff6" />
+    </linearGradient>
+  </defs>
+  <circle cx="300" cy="300" r="280" fill="url(#gradMaleB)" />
+  <text x="300" y="320" fill="#2f4d7a" font-size="48" font-family="'Noto Sans JP', sans-serif" text-anchor="middle">Male B</text>
+  <text x="300" y="370" fill="#2f4d7a" font-size="28" font-family="'Noto Sans JP', sans-serif" text-anchor="middle">Replace</text>
+</svg>
