@@ -311,29 +311,37 @@
     }
 
     .evidence-visual {
-      border: 1px solid rgba(12, 38, 96, 0.16);
-      background: rgba(255,255,255,0.96);
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 32px;
-      overflow: hidden;
       position: relative;
-      box-shadow: 0 28px 54px rgba(12, 38, 96, 0.18);
-      padding: 24px;
+      border-radius: 34px;
+      padding: 20px;
     }
 
-    .evidence-visual--primary { background: linear-gradient(160deg, #eff3ff, #dae4ff); }
-    .evidence-visual--secondary { background: linear-gradient(160deg, #fff2f0, #ffe3d9); }
-    .evidence-visual--tertiary { background: linear-gradient(160deg, #f0fff5, #e0f8ec); }
+    .evidence-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0));
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      box-shadow: 0 32px 64px rgba(12, 38, 96, 0.26);
+      pointer-events: none;
+    }
+
+    .evidence-visual--primary { background: linear-gradient(160deg, #f0f4ff, #dce6ff); }
+    .evidence-visual--secondary { background: linear-gradient(160deg, #fff3ea, #ffe3d6); }
+    .evidence-visual--tertiary { background: linear-gradient(160deg, #f1fff7, #dff7ea); }
 
     .evidence-visual img {
+      position: relative;
+      z-index: 1;
       width: 100%;
-      height: auto;
-      max-height: 860px;
-      object-fit: contain;
-      border-radius: 20px;
-      box-shadow: 0 12px 28px rgba(12, 38, 96, 0.12);
+      height: 100%;
+      object-fit: cover;
+      border-radius: 24px;
+      box-shadow: 0 18px 38px rgba(12, 38, 96, 0.18);
     }
 
     .profile-visual {
