@@ -217,7 +217,7 @@
     .section.navy .lead-paragraphs li { color: rgba(255, 255, 255, 0.88); }
     .section.navy .lead-paragraphs strong { color: var(--gold-light); }
     .section.navy .voice-card p,
-    .section.navy .voice-card h4 { color: var(--white); }
+    .section.navy .voice-card h4 { color: var(--navy-dark); }
 
     .lead-paragraphs strong { color: var(--navy); }
 
@@ -428,8 +428,30 @@
 
     .consultant-copy { color: var(--subtext); font-size: 0.98em; line-height: 1.7; }
 
-    .section.navy .voice-card { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255,255,255,0.2); }
-    .section.navy .voice-card .voice-visual { border: 3px solid rgba(255, 255, 255, 0.6); }
+    .section.navy .voice-card {
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(198, 162, 74, 0.45);
+      border-radius: 28px;
+      box-shadow: 0 24px 48px rgba(12, 38, 96, 0.2);
+      color: var(--navy-dark);
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+    }
+
+    .section.navy .voice-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      pointer-events: none;
+    }
+
+    .section.navy .voice-card .voice-visual {
+      border: 3px solid rgba(198, 162, 74, 0.45);
+      box-shadow: 0 18px 36px rgba(12, 38, 96, 0.18);
+    }
     .section.navy .evidence-visual { border-color: rgba(255, 255, 255, 0.35); background: rgba(6, 21, 57, 0.35); }
 
     .card h3 { color: var(--navy-dark); font-size: 1.2em; margin: 0 0 18px; }
