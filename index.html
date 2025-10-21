@@ -37,6 +37,7 @@
       font-size: clamp(16px, 1.2vw, 19px);
       background: linear-gradient(180deg, var(--ivory), var(--gray));
       scroll-behavior: smooth;
+      padding-bottom: clamp(120px, 18vw, 160px);
     }
 
     p, li {
@@ -535,6 +536,159 @@
 
     .footer p,
     .footer a { color: #ffffff; margin: 6px 0; }
+
+    .floating-footer {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(6, 21, 57, 0.96);
+      color: #ffffff;
+      padding: 18px clamp(18px, 5vw, 42px);
+      box-shadow: 0 -14px 36px rgba(6, 21, 57, 0.28);
+      border-top: 1px solid rgba(198, 162, 74, 0.35);
+      z-index: 1000;
+    }
+
+    .floating-footer__inner {
+      width: min(var(--max-width), 96vw);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: clamp(18px, 4vw, 48px);
+      flex-wrap: wrap;
+    }
+
+    .floating-footer__message {
+      display: grid;
+      gap: 6px;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+    }
+
+    .floating-footer__message strong {
+      font-size: 16px;
+      color: var(--gold-light);
+      letter-spacing: 0.08em;
+    }
+
+    .floating-footer__actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .floating-footer__countdown {
+      display: grid;
+      gap: 4px;
+      text-align: right;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .floating-footer__countdown-label {
+      letter-spacing: 0.12em;
+    }
+
+    .floating-footer__countdown-time {
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #ffffff;
+    }
+
+    .floating-footer__cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px clamp(28px, 5vw, 40px);
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy-dark);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.08em;
+      box-shadow: 0 16px 32px rgba(12, 38, 96, 0.32);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .floating-footer__cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 40px rgba(12, 38, 96, 0.36);
+    }
+
+    .floating-footer--ended .floating-footer__cta {
+      pointer-events: none;
+      background: rgba(255, 255, 255, 0.24);
+      color: rgba(6, 21, 57, 0.6);
+      box-shadow: none;
+    }
+
+    .floating-footer--ended .floating-footer__cta:hover {
+      transform: none;
+    }
+
+    @media (max-width: 720px) {
+      .floating-footer {
+        padding: 12px clamp(10px, 5vw, 16px) 14px;
+      }
+
+      .floating-footer__inner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+      }
+
+      .floating-footer__message {
+        text-align: left;
+        font-size: 12px;
+        letter-spacing: 0.02em;
+        gap: 2px;
+      }
+
+      .floating-footer__message strong {
+        font-size: 14px;
+      }
+
+      .floating-footer__message span {
+        display: none;
+      }
+
+      .floating-footer__actions {
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+      }
+
+      .floating-footer__countdown {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        text-align: left;
+        font-size: 11px;
+      }
+
+      .floating-footer__cta {
+        flex: 1 1 auto;
+        padding: 12px 16px;
+        font-size: 14px;
+        letter-spacing: 0.04em;
+      }
+
+      .floating-footer__countdown-label {
+        letter-spacing: 0.08em;
+      }
+
+      .floating-footer__countdown-time {
+        font-size: 18px;
+      }
+    }
 
     @media (max-width: 900px) {
       .hero-inner { margin: clamp(24px, 6vw, 48px) auto 0; }
@@ -1061,11 +1215,101 @@
     </div>
   </section>
 
+  <div class="floating-footer" id="floating-footer" role="complementary" aria-label="無料相談会申し込み案内">
+    <div class="floating-footer__inner">
+      <div class="floating-footer__message">
+        <strong>【本日締切】無料個別相談は先着順です</strong>
+        <span>残枠が埋まる前に、今すぐお申し込みください。</span>
+      </div>
+      <div class="floating-footer__actions">
+        <div class="floating-footer__countdown" aria-live="polite">
+          <span class="floating-footer__countdown-label">募集終了まで</span>
+          <span class="floating-footer__countdown-time" id="countdown-timer">12:00:00</span>
+        </div>
+        <a class="floating-footer__cta" href="https://example.com/entry" target="_blank" rel="noopener">無料相談に申し込む</a>
+      </div>
+    </div>
+  </div>
+
   <footer class="footer">
     <div class="container">
       <p>THE ONLY ONE 個別相談会｜運営：けいじ</p>
       <p>Copyright © THE ONLY ONE. All Rights Reserved.</p>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      const countdownEl = document.getElementById('countdown-timer');
+      const footerEl = document.getElementById('floating-footer');
+      const ctaEl = footerEl ? footerEl.querySelector('.floating-footer__cta') : null;
+      if (!countdownEl || !footerEl) {
+        return;
+      }
+
+      const STORAGE_KEY = 'the-only-one-floating-footer-deadline';
+      const DURATION = 12 * 60 * 60 * 1000; // 12 hours in milliseconds
+      const now = Date.now();
+      let deadline = now + DURATION;
+
+      try {
+        const storedValue = window.localStorage.getItem(STORAGE_KEY);
+        if (storedValue) {
+          const parsed = parseInt(storedValue, 10);
+          if (!Number.isNaN(parsed) && parsed > now) {
+            deadline = parsed;
+          } else {
+            deadline = now + DURATION;
+            window.localStorage.setItem(STORAGE_KEY, String(deadline));
+          }
+        } else {
+          window.localStorage.setItem(STORAGE_KEY, String(deadline));
+        }
+      } catch (error) {
+        deadline = now + DURATION;
+      }
+
+      const formatTime = function (ms) {
+        const totalSeconds = Math.max(0, Math.floor(ms / 1000));
+        const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+        const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+        const seconds = String(totalSeconds % 60).padStart(2, '0');
+        return hours + ':' + minutes + ':' + seconds;
+      };
+
+      const finalize = function () {
+        countdownEl.textContent = '00:00:00';
+        footerEl.classList.add('floating-footer--ended');
+        if (ctaEl) {
+          ctaEl.setAttribute('aria-disabled', 'true');
+          ctaEl.textContent = '受付は終了しました';
+        }
+        try {
+          window.localStorage.removeItem(STORAGE_KEY);
+        } catch (error) {
+          // localStorage unavailable, nothing else to do
+        }
+      };
+
+      const tick = function () {
+        const remaining = deadline - Date.now();
+        if (remaining <= 0) {
+          finalize();
+          window.clearInterval(intervalId);
+          return;
+        }
+        countdownEl.textContent = formatTime(remaining);
+      };
+
+      tick();
+      const intervalId = window.setInterval(tick, 1000);
+
+      document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'visible') {
+          tick();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
