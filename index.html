@@ -22,10 +22,15 @@
       --subtext: #4d5273;
       --white: #ffffff;
       --max-width: min(1080px, 100vw);
+      --floating-footer-offset: 0px;
     }
 
     * {
       box-sizing: border-box;
+    }
+
+    html {
+      overflow-x: hidden;
     }
 
     body {
@@ -37,7 +42,7 @@
       font-size: clamp(16px, 1.2vw, 19px);
       background: linear-gradient(180deg, var(--ivory), var(--gray));
       scroll-behavior: smooth;
-      padding-bottom: clamp(120px, 18vw, 160px);
+      padding-bottom: calc(var(--floating-footer-offset) + env(safe-area-inset-bottom));
       overflow-x: hidden;
     }
 
@@ -551,9 +556,11 @@
       background: rgba(6, 21, 57, 0.96);
       color: #ffffff;
       padding: 18px clamp(18px, 5vw, 42px);
+      padding-bottom: calc(18px + env(safe-area-inset-bottom));
       box-shadow: 0 -14px 36px rgba(6, 21, 57, 0.28);
       border-top: 1px solid rgba(198, 162, 74, 0.35);
       z-index: 1000;
+      transition: transform 0.3s ease, opacity 0.3s ease;
     }
 
     .floating-footer__inner {
@@ -637,6 +644,12 @@
 
     .floating-footer--ended .floating-footer__cta:hover {
       transform: none;
+    }
+
+    .floating-footer--hidden {
+      transform: translateY(110%);
+      opacity: 0;
+      pointer-events: none;
     }
 
     @media (max-width: 720px) {
@@ -1250,6 +1263,47 @@
       const countdownEl = document.getElementById('countdown-timer');
       const footerEl = document.getElementById('floating-footer');
       const ctaEl = footerEl ? footerEl.querySelector('.floating-footer__cta') : null;
+      const pageFooter = document.querySelector('footer.footer');
+      const rootStyle = document.documentElement.style;
+
+      const setFooterOffset = function (value) {
+        const offset = Math.max(0, value || 0);
+        rootStyle.setProperty('--floating-footer-offset', offset + 'px');
+        document.body.style.setProperty('--floating-footer-offset', offset + 'px');
+      };
+
+      const updateFooterOffset = function () {
+        if (!footerEl || footerEl.classList.contains('floating-footer--hidden')) {
+          return;
+        }
+        const footerHeight = footerEl.offsetHeight || 0;
+        setFooterOffset(footerHeight);
+      };
+
+      updateFooterOffset();
+      window.addEventListener('load', updateFooterOffset);
+      window.addEventListener('resize', updateFooterOffset);
+      window.addEventListener('orientationchange', updateFooterOffset);
+      if (typeof ResizeObserver !== 'undefined' && footerEl) {
+        const observer = new ResizeObserver(updateFooterOffset);
+        observer.observe(footerEl);
+      }
+
+      if (pageFooter && footerEl && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              footerEl.classList.add('floating-footer--hidden');
+              setFooterOffset(0);
+            } else {
+              footerEl.classList.remove('floating-footer--hidden');
+              updateFooterOffset();
+            }
+          });
+        }, { rootMargin: '0px 0px 120px 0px' });
+        io.observe(pageFooter);
+      }
+
       if (!countdownEl || !footerEl) {
         return;
       }
@@ -1291,6 +1345,7 @@
           ctaEl.setAttribute('aria-disabled', 'true');
           ctaEl.textContent = '受付は終了しました';
         }
+        setFooterOffset(0);
         try {
           window.localStorage.removeItem(STORAGE_KEY);
         } catch (error) {
