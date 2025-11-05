@@ -23,6 +23,10 @@
       --white: #ffffff;
       --max-width: min(1080px, 100vw);
       --floating-footer-offset: 0px;
+      --tilt-x: 0deg;
+      --tilt-y: 0deg;
+      --tilt-depth: 32px;
+      --card-float-distance: 12px;
     }
 
     * {
@@ -84,6 +88,44 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      perspective: 1600px;
+      overflow: hidden;
+    }
+
+    .hero-orb {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(0);
+      opacity: 0.32;
+      pointer-events: none;
+      transform-style: preserve-3d;
+      animation: hero-orb-drift 24s ease-in-out infinite;
+      will-change: transform, opacity;
+      z-index: 0;
+    }
+
+    .hero-orb--left {
+      width: clamp(160px, 28vw, 320px);
+      height: clamp(160px, 28vw, 320px);
+      left: clamp(-120px, -12vw, -60px);
+      top: clamp(40px, 10vw, 120px);
+      background: radial-gradient(circle at 30% 30%, rgba(233, 210, 143, 0.35), rgba(12, 38, 96, 0.02) 65%);
+    }
+
+    .hero-orb--right {
+      width: clamp(140px, 24vw, 280px);
+      height: clamp(140px, 24vw, 280px);
+      right: clamp(-90px, -8vw, -40px);
+      bottom: clamp(-40px, -6vw, 20px);
+      background: radial-gradient(circle at 70% 40%, rgba(198, 162, 74, 0.28), rgba(12, 38, 96, 0.05) 70%);
+      animation-delay: -7s;
+    }
+
+    @keyframes hero-orb-drift {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.28; }
+      25% { transform: translate3d(12px, -18px, 0) scale(1.06); opacity: 0.4; }
+      50% { transform: translate3d(-10px, 14px, 0) scale(0.94); opacity: 0.26; }
+      75% { transform: translate3d(18px, 6px, 0) scale(1.08); opacity: 0.36; }
     }
 
     .hero-visual { margin: 0; width: 100%; }
@@ -97,6 +139,7 @@
       display: flex;
       justify-content: center;
       padding-inline: clamp(20px, 6vw, 48px);
+      z-index: 1;
     }
 
     .hero-panel {
@@ -110,6 +153,32 @@
       gap: 24px;
       justify-items: center;
       text-align: center;
+      position: relative;
+      transform-style: preserve-3d;
+      transform: translateZ(calc(var(--tilt-depth) * 0.25)) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+      transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.6s ease;
+      will-change: transform, box-shadow;
+      pointer-events: auto;
+    }
+
+    .hero-panel::before {
+      content: '';
+      position: absolute;
+      inset: -12%;
+      background: radial-gradient(circle at top, rgba(198, 162, 74, 0.18), transparent 55%);
+      filter: blur(12px);
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      z-index: -1;
+    }
+
+    .hero-panel--active {
+      transition-duration: 0.25s;
+      box-shadow: 0 28px 70px rgba(6, 21, 57, 0.32);
+    }
+
+    .hero-panel--active::before {
+      opacity: 1;
     }
 
     .hero-tag {
@@ -130,6 +199,7 @@
       letter-spacing: 0.04em;
       margin: 0;
       color: var(--navy-dark);
+      transform: translateZ(calc(var(--tilt-depth) * 0.4));
     }
 
     .hero-description {
@@ -137,6 +207,7 @@
       font-size: clamp(16px, 2.2vw, 18px);
       color: var(--subtext);
       max-width: 680px;
+      transform: translateZ(calc(var(--tilt-depth) * 0.2));
     }
 
     .hero-cta {
@@ -145,6 +216,7 @@
       gap: 18px;
       align-items: center;
       justify-content: center;
+      transform: translateZ(calc(var(--tilt-depth) * 0.5));
     }
 
     .btn-main {
@@ -160,9 +232,10 @@
       color: var(--navy-dark);
       box-shadow: 0 16px 34px rgba(12, 38, 96, 0.32);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transform: translateZ(calc(var(--tilt-depth) * 0.6));
     }
 
-    .btn-main:hover { transform: translateY(-3px); box-shadow: 0 22px 40px rgba(12, 38, 96, 0.36); }
+    .btn-main:hover { transform: translateZ(calc(var(--tilt-depth) * 0.6)) translateY(-3px); box-shadow: 0 22px 40px rgba(12, 38, 96, 0.36); }
 
     .badge {
       display: inline-flex;
@@ -175,6 +248,17 @@
       letter-spacing: 0.06em;
       color: var(--navy);
       border: 1px solid rgba(12, 38, 96, 0.14);
+      transform: translateZ(calc(var(--tilt-depth) * 0.3));
+    }
+
+    @keyframes float-card {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(calc(var(--card-float-distance) * -1)); }
+    }
+
+    @keyframes float-card-alt {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(var(--card-float-distance)); }
     }
 
     .first-lead {
@@ -241,6 +325,24 @@
       gap: 28px;
     }
 
+    .card-grid .card:nth-child(odd) { animation: float-card 10s ease-in-out infinite; }
+    .card-grid .card:nth-child(even) { animation: float-card-alt 12s ease-in-out infinite; }
+
+    .voice-card { animation: float-card 11s ease-in-out infinite; }
+
+    .card:hover,
+    .voice-card:hover,
+    .timeline-step:hover,
+    .profile-block:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 28px 54px rgba(12, 38, 96, 0.15);
+    }
+
+    .card:hover,
+    .voice-card:hover {
+      animation-play-state: paused;
+    }
+
     .card, .voice-card, .faq-item, .profile-block, .timeline-step {
       background: var(--white);
       border-radius: 20px;
@@ -248,9 +350,37 @@
       border: 1px solid rgba(12, 38, 96, 0.08);
       box-shadow: 0 18px 40px rgba(12, 38, 96, 0.08);
       color: var(--text);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
 
     .profile-block { display: grid; gap: 20px; justify-items: center; text-align: left; }
+
+    [data-depth] {
+      position: relative;
+      z-index: 0;
+      --section-shift: 0px;
+      overflow: hidden;
+    }
+
+    [data-depth]::before {
+      content: '';
+      position: absolute;
+      inset: -30%;
+      background: radial-gradient(circle at 50% 20%, rgba(198, 162, 74, 0.12), transparent 65%), radial-gradient(circle at 80% 75%, rgba(12, 38, 96, 0.08), transparent 70%);
+      transform: translate3d(calc(var(--section-shift) * -0.9), calc(var(--section-shift) * 0.7), 0);
+      transition: transform 0.4s ease, opacity 0.6s ease;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .first-lead[data-depth]::before {
+      background: radial-gradient(circle at 35% 25%, rgba(198, 162, 74, 0.16), transparent 65%), radial-gradient(circle at 72% 70%, rgba(12, 38, 96, 0.06), transparent 70%);
+    }
+
+    .section.navy[data-depth]::before {
+      background: radial-gradient(circle at 45% 22%, rgba(233, 210, 143, 0.18), transparent 65%), radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.08), transparent 72%);
+      opacity: 0.6;
+    }
 
     .card-visual,
     .voice-visual,
@@ -713,6 +843,39 @@
       }
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      :root {
+        --tilt-depth: 0px;
+        --card-float-distance: 0px;
+      }
+
+      .hero-panel,
+      .hero-panel::before,
+      .card,
+      .voice-card,
+      .timeline-step,
+      .profile-block,
+      [data-depth]::before {
+        transition: none !important;
+        animation: none !important;
+        transform: none !important;
+        box-shadow: 0 18px 40px rgba(12, 38, 96, 0.08);
+      }
+
+      .btn-main {
+        transform: none !important;
+      }
+      [data-depth] {
+        overflow: visible;
+      }
+      [data-depth]::before {
+        opacity: 0 !important;
+      }
+      .hero-orb {
+        display: none !important;
+      }
+    }
+
     @media (max-width: 900px) {
       .hero-inner { margin: clamp(24px, 6vw, 48px) auto 0; }
       .hero-panel { padding: clamp(32px, 6vw, 48px); }
@@ -730,6 +893,8 @@
 </head>
 <body>
   <header class="hero">
+    <div class="hero-orb hero-orb--left" aria-hidden="true"></div>
+    <div class="hero-orb hero-orb--right" aria-hidden="true"></div>
     <picture class="hero-visual">
       <source media="(max-width: 900px)" srcset="renai_session_sp.png">
       <img src="renai_session_pc.png" alt="THE ONLY ONE 個別相談会のキービジュアル">
@@ -747,7 +912,7 @@
     </div>
   </header>
 
-  <section class="first-lead">
+  <section class="first-lead" data-depth="0.45">
     <div class="container">
       <div class="lead-paragraphs">
         <p>もう恋愛のためにテンションを作ったり、誰かのテンプレートを演じたりする時代は終わりです。<br>あなたの誠実さは、本命女性に刺さる武器になるんです。</p>
@@ -756,7 +921,7 @@
     </div>
   </section>
 
-  <section class="section light" id="empathy">
+  <section class="section light" id="empathy" data-depth="0.6">
     <div class="container">
       <div class="section-title">
         <h2>なぜ、恋愛ノウハウを学んでも成果が出ないのか？</h2>
@@ -770,7 +935,7 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" data-depth="0.4">
     <div class="container">
       <div class="section-title">
         <h2>あなたは悪くない。間違っていたのは「戦う土俵」だけ。</h2>
@@ -787,7 +952,7 @@
     </div>
   </section>
 
-  <section class="section sky">
+  <section class="section sky" data-depth="0.55">
     <div class="container">
       <div class="section-title">
         <h2>あなたのために開発された世界で唯一無二の恋愛プログラム</h2>
@@ -799,7 +964,7 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" data-depth="0.5">
     <div class="container">
       <div class="section-title">
         <h2>あなたの誠実さを魅力に変えることで手にできる未来</h2>
@@ -875,7 +1040,7 @@
     </div>
   </section>
 
-  <section class="section navy">
+  <section class="section navy" data-depth="0.45">
     <div class="container">
       <div class="section-title">
         <h2>あなたと同じような悩みを持っていた方が続々と成果を出してます</h2>
@@ -958,7 +1123,7 @@
     </div>
   </section>
 
-  <section class="section sand">
+  <section class="section sand" data-depth="0.4">
     <div class="container">
       <div class="section-title">
         <h2>業界初！男性×女性のハイブリッド型コンサルティング</h2>
@@ -1043,7 +1208,7 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" data-depth="0.35">
     <div class="container">
       <div class="section-title">
         <h2>たったの60分であなたが本命彼女を手に入れる恋愛戦略を設計します</h2>
@@ -1118,7 +1283,7 @@
     </div>
   </section>
 
-  <section class="section navy">
+  <section class="section navy" data-depth="0.35">
     <div class="container">
       <div class="section-title">
         <h2>なぜ、このプログラムを創ったのか？</h2>
@@ -1131,7 +1296,7 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" data-depth="0.3">
     <div class="container">
       <div class="section-title">
         <h2>迷っている間に、未来のパートナーはライバルに奪われている</h2>
@@ -1148,7 +1313,7 @@
     </div>
   </section>
 
-  <section class="section beige" id="faq">
+  <section class="section beige" id="faq" data-depth="0.25">
     <div class="container">
       <div class="section-title">
         <h2>よくある質問</h2>
@@ -1203,7 +1368,7 @@
     </div>
   </section>
 
-  <section class="section" id="closure">
+  <section class="section" id="closure" data-depth="0.28">
     <div class="container">
       <div class="section-title">
         <h2>最後に、ここまで読んでくれたあなたへ伝えたいこと</h2>
@@ -1227,7 +1392,7 @@
     </div>
   </section>
 
-  <section class="section navy" id="entry">
+  <section class="section navy" id="entry" data-depth="0.22">
     <div class="container">
       <div class="cta-banner">
         <h3>【毎月5名様限定】無料個別相談 &amp; 戦略ロードマップ</h3>
@@ -1262,6 +1427,163 @@
   </footer>
 
   <script>
+    (function () {
+      const panel = document.querySelector('.hero-panel');
+      const hero = document.querySelector('.hero');
+      if (!panel || !hero) {
+        return;
+      }
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const supportsHover = window.matchMedia('(hover: hover)');
+      if (prefersReducedMotion.matches || !supportsHover.matches) {
+        return;
+      }
+
+      let targetTiltX = 0;
+      let targetTiltY = 0;
+      let rafId = null;
+
+      const applyTilt = function () {
+        panel.style.setProperty('--tilt-x', targetTiltX.toFixed(2) + 'deg');
+        panel.style.setProperty('--tilt-y', targetTiltY.toFixed(2) + 'deg');
+        rafId = null;
+      };
+
+      const scheduleUpdate = function () {
+        if (rafId !== null) {
+          return;
+        }
+        rafId = window.requestAnimationFrame(applyTilt);
+      };
+
+      const handlePointerMove = function (event) {
+        if (event.pointerType && event.pointerType !== 'mouse' && event.pointerType !== 'pen') {
+          return;
+        }
+        const rect = panel.getBoundingClientRect();
+        const relX = (event.clientX - rect.left) / rect.width;
+        const relY = (event.clientY - rect.top) / rect.height;
+
+        targetTiltY = (relX - 0.5) * 10;
+        targetTiltX = (0.5 - relY) * 8;
+        scheduleUpdate();
+      };
+
+      const resetTilt = function () {
+        targetTiltX = 0;
+        targetTiltY = 0;
+        scheduleUpdate();
+        panel.classList.remove('hero-panel--active');
+      };
+
+      const activateTilt = function (event) {
+        if (event.pointerType && event.pointerType !== 'mouse' && event.pointerType !== 'pen') {
+          return;
+        }
+        panel.classList.add('hero-panel--active');
+      };
+
+      panel.addEventListener('pointermove', handlePointerMove);
+      panel.addEventListener('pointerenter', activateTilt);
+      panel.addEventListener('pointerleave', resetTilt);
+      hero.addEventListener('mouseleave', resetTilt);
+
+      panel.addEventListener('focusin', function () {
+        panel.classList.add('hero-panel--active');
+      });
+
+      panel.addEventListener('focusout', function () {
+        if (!panel.contains(document.activeElement)) {
+          resetTilt();
+        }
+      });
+
+      const handleReduceChange = function (event) {
+        if (event.matches) {
+          panel.style.removeProperty('--tilt-x');
+          panel.style.removeProperty('--tilt-y');
+          panel.classList.remove('hero-panel--active');
+          panel.removeEventListener('pointermove', handlePointerMove);
+          panel.removeEventListener('pointerenter', activateTilt);
+          panel.removeEventListener('pointerleave', resetTilt);
+          hero.removeEventListener('mouseleave', resetTilt);
+        }
+      };
+
+      if (typeof prefersReducedMotion.addEventListener === 'function') {
+        prefersReducedMotion.addEventListener('change', handleReduceChange);
+      } else if (typeof prefersReducedMotion.addListener === 'function') {
+        prefersReducedMotion.addListener(handleReduceChange);
+      }
+    })();
+
+    (function () {
+      const depthElements = document.querySelectorAll('[data-depth]');
+      if (!depthElements.length) {
+        return;
+      }
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const maxShift = 80;
+      let ticking = false;
+
+      const updateDepth = function () {
+        const viewportCenter = window.innerHeight / 2;
+        depthElements.forEach(function (element) {
+          const rect = element.getBoundingClientRect();
+          const elementCenter = rect.top + rect.height / 2;
+          const normalized = (viewportCenter - elementCenter) / viewportCenter;
+          const depthFactor = parseFloat(element.dataset.depth || '0.4');
+          const shift = Math.max(-maxShift, Math.min(maxShift, normalized * depthFactor * maxShift));
+          element.style.setProperty('--section-shift', shift.toFixed(2) + 'px');
+        });
+        ticking = false;
+      };
+
+      const requestUpdate = function () {
+        if (!ticking) {
+          ticking = true;
+          window.requestAnimationFrame(updateDepth);
+        }
+      };
+
+      const enableDepthEffects = function () {
+        updateDepth();
+        window.addEventListener('scroll', requestUpdate, { passive: true });
+        window.addEventListener('resize', updateDepth, { passive: true });
+      };
+
+      const disableDepthEffects = function () {
+        ticking = false;
+        window.removeEventListener('scroll', requestUpdate);
+        window.removeEventListener('resize', updateDepth);
+        depthElements.forEach(function (element) {
+          element.style.setProperty('--section-shift', '0px');
+        });
+      };
+
+      if (prefersReducedMotion.matches) {
+        disableDepthEffects();
+      } else {
+        enableDepthEffects();
+      }
+
+      const handlePreferenceChange = function (event) {
+        if (event.matches) {
+          disableDepthEffects();
+        } else {
+          enableDepthEffects();
+        }
+      };
+
+      if (typeof prefersReducedMotion.addEventListener === 'function') {
+        prefersReducedMotion.addEventListener('change', handlePreferenceChange);
+      } else if (typeof prefersReducedMotion.addListener === 'function') {
+        prefersReducedMotion.addListener(handlePreferenceChange);
+      }
+    })();
+
     (function () {
       const countdownEl = document.getElementById('countdown-timer');
       const footerEl = document.getElementById('floating-footer');
